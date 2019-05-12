@@ -1,3 +1,10 @@
+Added Compile.sh and Run.sh bash scripts for easier access. Open them with text editor to edit the commands or run them using the following terminal command:
+
+bash Compile.sh
+or
+bash Run.sh
+
+
 if this is your first time here, check the issues tab, it requires your attention asap
 
 here are a few useful commands im using to compile on the virtual machine
