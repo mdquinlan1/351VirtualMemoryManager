@@ -8,3 +8,9 @@ g++ -o 351FinalExec Main.cpp MemoryManagementUnit.cpp BackingStore.cpp RAM.cpp
 
 ./351FinalExec
 ^ RUN ^
+
+
+https://github.com/MagedSaeed/vertual_memroy_manager/blob/master/main.c
+here is a project (all done in main using global variables) that ive
+been following along to, all we need to do is separate it into object
+orientated design
