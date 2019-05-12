@@ -4,6 +4,7 @@
 #include <iostream>
 #include "MemoryManagementUnit.h"
 #include "Address.h"
+#include "PageTableEntry.h"
 
 using namespace std;
 
