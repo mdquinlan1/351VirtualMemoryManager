@@ -1,7 +1,15 @@
-//temp
-#define FRAME_SIZE 256 //256 bytes
-#define NUM_FRAMES 256
-#define TLB_SIZE 16
-#define PAGE_SIZE 256
-#define VM_SIZE 256
-#define RAM_SIZE (FRAME_SIZE * NUM_FRAMES)
+#include <stdio.h>
+#include "Word.h"
+
+using namespace std;
+
+class PageReplacementAlgorithm{
+    public:
+        ~PageReplacementAlgorithm();
+        Word findVictim();
+        PageReplacementAlgorithm& getPRA();
+        void updateUsage();
+    
+    protected:
+        PageReplacementAlgorithm();
+};
