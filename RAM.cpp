@@ -11,14 +11,22 @@ int RAM::frameAvailable() {
   return -999; //no empty frame was found
 }
 */
-int RAM::loadProcess(char buffer[], int *freeFrameIndex) {
+int RAM::loadProcess(unsigned char *thisBuffer, int *freeFrameIndex) {
   cout << "Entering loadProcess method." << endl;
-  for (int i = 0; i < READ_SIZE; i++) {
-    ramArray[*freeFrameIndex][i] = buffer[i];
+  //ramArray[*freeFrameIndex][0] = buffer[READ_SIZE];
+  //int temp = *freeFrameIndex;
+
+  for (int i = 0; i < NUM_FRAMES; i++) {
+    cout << "inside" << endl;
+
+    //cout << buffer[i] << endl;
+    ramArray[*freeFrameIndex][i] = thisBuffer[i];
+    cout << "error" << endl;
   }
+
   (*freeFrameIndex)++;
   cout << "For loop completed." << endl;
-  return 1;
+  return (*freeFrameIndex - 1);
 }
 
 void RAM::removeProcess() {
@@ -26,6 +34,7 @@ void RAM::removeProcess() {
 }
 
 RAM::RAM() {
+  //ramArray = new unsigned char[NUM_FRAMES][FRAME_SIZE];
   //ramArray[NUM_FRAMES][FRAME_SIZE] = {0};
 }
 

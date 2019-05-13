@@ -1,7 +1,7 @@
 #include "RAM.h"
 #include "BackingStore.h"
 
-char BackingStore::readStore(int pageNumber) {
+unsigned char * BackingStore::readStore(int pageNumber) {
   ifstream file("BACKING_STORE.bin", ios::in | ios::binary);
 
   if (file.is_open()) {
@@ -10,11 +10,11 @@ char BackingStore::readStore(int pageNumber) {
     file.seekg(READ_SIZE * pageNumber, ios::beg);
 
     //file.read(buffer, READ_SIZE);
-    file.read(buffer, READ_SIZE);
+    file.read((char*)buffer, READ_SIZE);
     file.close();
     cout << "File closed, now returning buffer to caller." << endl;
 
-    return buffer[READ_SIZE];
+    return buffer;
 
   } else {
     cout << "Error opening file." << endl;
@@ -23,11 +23,12 @@ char BackingStore::readStore(int pageNumber) {
   file.close();
 }
 
-char BackingStore::getBuffer() {
-  return buffer[READ_SIZE];
+unsigned char * BackingStore::getBuffer() {
+  return buffer;
 }
 
 BackingStore::BackingStore() {
+  buffer = new unsigned char[READ_SIZE];
   //ifstream file("BACKING_STORE.bin", ios::in | ios::binary);
 }
 

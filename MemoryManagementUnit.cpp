@@ -1,17 +1,13 @@
 #include "MemoryManagementUnit.h"
-//#include "RAM.h"
-//#include "BackingStore.h"
+#include "definitions.h"
 
 
 MemoryManagementUnit::MemoryManagementUnit() {
-
-  //BackingStore bkingstr;  //create the backing store object
-  //RAM ram;                //create the ram to be used
   populateTLB();
   populatePageTable();
   frameNumber = -999; //this is just to assume it's not valid frame at start
-  *freeFrameIndex = 0;
-  *freePageIndex = 0;
+  freeFrameIndex = 0;
+  freePageIndex = 0;
   translatedAddresses = 0;
   pageAccessCount = 0;
   pageInFaultCount = 0;
@@ -25,22 +21,33 @@ MemoryManagementUnit::~MemoryManagementUnit() {
 }
 
 void MemoryManagementUnit::populateTLB() {
+  /*
   for (int i = 0; i < TLB_SIZE; i++) {
     TLB[i].pageNum = i;
     TLB[i].frameNum = i;
   }
+  */
 }
+
+
 
 void MemoryManagementUnit::populatePageTable() {
   for (int i = 0; i < NUM_FRAMES; i++) {
+    cout << i << endl;
     PageTable[i].pageNum = i;
     PageTable[i].frameNum = i;
+    unsigned char *temp = new unsigned char[READ_SIZE];
+    temp = bkingstr.readStore(pageNumber);
+    frameNumber = ram.loadProcess(temp, freeFrameIndex);
+    cout << "what" << endl;
   }
 }
 
 void MemoryManagementUnit::translateAddress(int givenAddy) {
   pageNumber = ((givenAddy & PAGE_MASK)>>8); //masks then shift
   offset = (givenAddy & OFFSET_MASK);
+  cout << "PageNumber: " << pageNumber << endl;
+  cout << "Offset: " << offset << endl;
 }
 
 void MemoryManagementUnit::searchTLB() {
@@ -52,6 +59,7 @@ void MemoryManagementUnit::searchTLB() {
     }
   }
   if (frameNumber == -999) {
+    cout << "NOT FOUND IN TLB." << endl;
     searchPageTable();
   }
 }
@@ -60,23 +68,22 @@ void MemoryManagementUnit::searchPageTable() {  //do this if TLB didnt hit
 
   cout << "Entered searchPageTable method." << endl;
 
-  for (int i = 0; i < PAGE_TABLE_SIZE; i++) {  //num_frames OK for NOW
+  for (int i = 0; i < NUM_FRAMES; i++) {  //num_frames OK for NOW
     if (PageTable[i].pageNum == pageNumber) {
       frameNumber = PageTable[i].frameNum;
-      return;
     }
   }
   cout << "Attempting to go to backing store." << endl;
 
   if (frameNumber == -999) {    //didn't find page in PageTable
                                 //now must access the BackingStore
-    char temp[READ_SIZE];
-    temp[READ_SIZE] = bkingstr.readStore(pageNumber);
+    unsigned char *temp = new unsigned char[READ_SIZE];
+    temp = bkingstr.readStore(pageNumber);
     frameNumber = ram.loadProcess(temp, freeFrameIndex);
     //frameNumber = bkingstr.readStore(pageNumber);
     pageInFaultCountM();
   }
-  
+
 }
 
 

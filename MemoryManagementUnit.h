@@ -6,16 +6,6 @@
 #include "BackingStore.h"
 using namespace std;
 
-#define FRAME_SIZE 256 //256 bytes
-#define NUM_FRAMES 256
-#define TLB_SIZE 16
-#define PAGE_SIZE 256
-#define PAGE_TABLE_SIZE 256
-#define VM_SIZE 256
-#define RAM_SIZE (FRAME_SIZE * NUM_FRAMES)
-#define PAGE_MASK 0xFFFF
-#define OFFSET_MASK 0xFF
-
 
 class MemoryManagementUnit {
 
@@ -31,6 +21,8 @@ public:
   void populateTLB();
   void populatePageTable();
   void searchPageTable();
+
+  int physicalAddress();
 
   //void insertIntoTLB(pageNumber, frameNumber);
 
