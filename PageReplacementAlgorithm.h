@@ -5,11 +5,9 @@ using namespace std;
 
 class PageReplacementAlgorithm{
     public:
+        PageReplacementAlgorithm();
         ~PageReplacementAlgorithm();
         Word findVictim();
         PageReplacementAlgorithm& getPRA();
         void updateUsage();
-    
-    protected:
-        PageReplacementAlgorithm();
 };
