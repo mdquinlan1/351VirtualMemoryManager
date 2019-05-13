@@ -1,0 +1,6 @@
+Entered searchPageTable method.
+Page Access Count : 0
+Page Fault Count : 0
+TLB Access Count : 58
+TLB Fault Count : 0
+Total translated addresses : 1000
