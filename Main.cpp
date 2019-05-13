@@ -18,14 +18,14 @@ using namespace std;
 
 
 int main() {
-
+  
   string logicalAddress;
   string tempBinAdd;
   int logicalAddy, physicalAddy;
   Address myword, offset, frameNumber, pageNumber;
 
   ifstream myfile("addresses.txt");
-
+  
   if (myfile.is_open()) {
     MemoryManagementUnit mmu;
     //BackingStore bkingstr;
@@ -81,7 +81,6 @@ int main() {
 
   } else {
     cout << "Error opening file. Exiting now." << endl << endl;
-  }
-
+  } 
   return 0;
 }

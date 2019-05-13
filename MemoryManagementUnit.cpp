@@ -10,8 +10,8 @@ MemoryManagementUnit::MemoryManagementUnit() {
   populateTLB();
   populatePageTable();
   frameNumber = -999; //this is just to assume it's not valid frame at start
-  *freeFrameIndex = 0;
-  *freePageIndex = 0;
+  freeFrameIndex = 0;
+  freePageIndex = 0;
   translatedAddresses = 0;
   pageAccessCount = 0;
   pageInFaultCount = 0;
